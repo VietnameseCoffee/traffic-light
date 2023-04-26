@@ -9,13 +9,18 @@ module.exports = {
     compress: true,
     port: 3000,
   },
-  entry: "./src/index.js",
+  entry: "./src/index.ts",
   mode: "development",
   module: {
     rules: [
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
     ],
   },
@@ -30,6 +35,9 @@ module.exports = {
       title: "Output",
     }),
   ],
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
   watch: true,
   watchOptions: {
     ignored: /node_modules/,

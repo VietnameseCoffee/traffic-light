@@ -1,37 +1,47 @@
-import { addStyle } from "./util/util";
+import BaseElement from "./base-element";
 
-class TrafficLight {
-  constructor(parent, initLights, duration) {
+class TrafficLight extends BaseElement {
+  parent: HTMLElement;
+  dom: HTMLElement;
+  colors: Array<string>;
+  light: number;
+  cycle?: ReturnType<typeof setTimeout>;
+
+  constructor(parent: HTMLElement) {
+    super();
+    const initLights = ["red", "yellow", "green"];
     this.parent = parent;
-    this.dom = this.#buildLight(initLights);
+    this.dom = this.buildLight(initLights);
     this.colors = initLights;
     this.light = 0;
 
-    const activeLight = this.dom.querySelector(`#${this.colors[this.light]}`);
-    addStyle(activeLight, {
+    const activeLight = this.dom.querySelector(
+      `#${this.colors[this.light]}`
+    ) as HTMLElement;
+    this.addStyle(activeLight, {
       opacity: "1",
     });
   }
 
-  append() {
+  append(): void {
     this.parent.append(this.dom);
   }
 
-  change() {
+  change(): void {
     this.light = (this.light + (this.colors.length - 1)) % this.colors.length;
 
     this.colors.forEach((color, i) => {
       const light = this.getLight(color);
       const opacity = i === this.light ? "1" : "0.16";
-      addStyle(light, { opacity });
+      this.addStyle(light, { opacity });
     });
   }
 
-  getLight(color) {
+  getLight(color: string): HTMLElement {
     return this.dom.querySelector(`#${color}`);
   }
 
-  startCycle() {
+  startCycle(): void {
     this.light = 0;
     this.cycle = setTimeout(() => {
       this.change();
@@ -53,9 +63,9 @@ class TrafficLight {
    * PRIVATE
    */
 
-  #buildLight(initLights) {
+  buildLight(initLights: Array<string>) {
     const trafficLight = document.createElement("div");
-    addStyle(trafficLight, {
+    this.addStyle(trafficLight, {
       border: "2px solid black",
       width: "3rem",
       height: "8rem",
@@ -70,13 +80,13 @@ class TrafficLight {
     const lights = initLights.map((color) => {
       const light = document.createElement("div");
       const fill = document.createElement("div");
-      addStyle(light, {
+      this.addStyle(light, {
         border: "2px solid #4f4f4f",
         borderRadius: "100%",
         height: "2rem",
         width: "2rem",
       });
-      addStyle(fill, {
+      this.addStyle(fill, {
         backgroundColor: color,
         borderRadius: "100%",
         height: "2rem",

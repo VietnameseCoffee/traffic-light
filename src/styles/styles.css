@@ -1,9 +1,67 @@
+@import "variables.css";
 
-.test {
-    border: 1px solid blue;
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
-.background {
-    width: 10rem;
-    height: 10rem;
+.test {
+  border: 1px solid blue;
+}
+
+#app {
+  height: 40rem;
+  width: 50rem;
+}
+
+#backdrop {
+  height: 34rem;
+  width: 50rem;
+}
+
+.sky {
+  background-color: var(--sky);
+  height: 15rem;
+  width: 100%;
+}
+
+.ground {
+  position: relative;
+  background-color: var(--ground);
+  height: 19rem;
+  width: 100%;
+}
+
+.road {
+  position: absolute;
+  bottom: 2.5rem;
+  background-color: var(--road);
+  width: 100%;
+  height: 6rem;
+}
+
+.divider {
+  width: 100%;
+  border: 1px solid var(--divider);
+  position: absolute;
+  top: 50%;
+}
+
+#root {
+  border: 1px solid black;
+  height: 15rem;
+  width: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
