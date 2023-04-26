@@ -8,8 +8,10 @@ console.log("hello type");
 
 new Backdrop();
 
-// const root = document.getElementById("root");
-// const light = new TrafficLight(root);
+const root = document.querySelector(".pole") as HTMLElement;
+const light = new TrafficLight(root);
+light.append();
+
 // const startButton = document.createElement("button");
 // startButton.onclick = () => light.startCycle();
 // startButton.innerText = "Start";
@@ -17,7 +19,5 @@ new Backdrop();
 // const endButton = document.createElement("button");
 // endButton.onclick = () => light.stopCycle();
 // endButton.innerText = "End";
-
 // root.append(startButton);
 // root.append(endButton);
-// light.append();

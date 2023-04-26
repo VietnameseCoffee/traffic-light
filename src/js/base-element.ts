@@ -4,6 +4,7 @@ export interface Style {
   border?: string;
   borderRadius?: string;
   display?: string;
+  filter?: string;
   flexDirection?: string;
   height?: string;
   margin?: string;

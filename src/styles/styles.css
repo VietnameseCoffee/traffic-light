@@ -1,10 +1,12 @@
 @import "variables.css";
+@import "animations.css";
 
 html {
   height: 100%;
   padding: 0;
   margin: 0;
 }
+
 body {
   margin: 0;
   display: flex;
@@ -40,9 +42,10 @@ body {
   background-color: var(--ground);
   height: 19rem;
   width: 100%;
+  z-index: 2;
 }
 
-.road {
+.road-h {
   position: absolute;
   bottom: 2.5rem;
   background-color: var(--road);
@@ -50,18 +53,58 @@ body {
   height: 6rem;
 }
 
-.divider {
+.road-v {
+  position: absolute;
+  left: 15rem;
+  height: 16rem;
+  width: 6rem;
+  fill: var(--road);
+}
+
+.divider-h {
   width: 100%;
   border: 1px solid var(--divider);
   position: absolute;
   top: 50%;
 }
 
-#root {
-  border: 1px solid black;
-  height: 15rem;
-  width: 15rem;
+.divider-v {
+  height: 100%;
+  border: 1px solid var(--divider);
+  position: absolute;
+  left: 50%;
+}
+
+.intersection {
+  height: 6rem;
+  width: 6rem;
+  background-color: var(--road);
+  position: absolute;
+  bottom: 2.5rem;
+  left: 15.25rem;
+}
+
+.pole-bottom {
+  width: 0.5rem;
+  background-color: var(--dark);
+  height: 3rem;
+}
+
+.pole-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  position: absolute;
+  top: 1.5rem;
+  left: 12.5rem;
+}
+
+.sun {
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--divider);
+  border-radius: 50%;
+  position: absolute;
+  top: 6rem;
+  right: 16rem;
 }

@@ -8,12 +8,22 @@
 </head>
 <body>
     <div id="app">
-        <div id="backdrop" class="test">
+        <div id="backdrop">
             <div class="sky"></div>
+            <div class="sun"></div>
             <div class="ground">
-                <div class="road">
-                    <div class="divider"></div>
+                <div class="road-h">
+                    <div class="divider-h"></div>
                 </div>
+                <svg class="road-v"height="400" width="100">
+                    <polygon points="20,0 80,0 100,400 0,400" />
+                  </svg>
+                <div class="pole-container">
+                    <div class="pole"></div>
+                    <div class="pole-bottom"></div>
+                </div>
+                <div class="intersection"></div>
+            </div>
             </div>
         </div>
     </div>

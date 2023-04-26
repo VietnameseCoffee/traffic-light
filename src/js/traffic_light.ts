@@ -19,7 +19,7 @@ class TrafficLight extends BaseElement {
       `#${this.colors[this.light]}`
     ) as HTMLElement;
     this.addStyle(activeLight, {
-      opacity: "1",
+      filter: "brightness(1)",
     });
   }
 
@@ -32,8 +32,8 @@ class TrafficLight extends BaseElement {
 
     this.colors.forEach((color, i) => {
       const light = this.getLight(color);
-      const opacity = i === this.light ? "1" : "0.16";
-      this.addStyle(light, { opacity });
+      const filter = i === this.light ? "brightness(1)" : "brightness(0.1)";
+      this.addStyle(light, { filter });
     });
   }
 
@@ -66,11 +66,11 @@ class TrafficLight extends BaseElement {
   buildLight(initLights: Array<string>) {
     const trafficLight = document.createElement("div");
     this.addStyle(trafficLight, {
-      border: "2px solid black",
-      width: "3rem",
-      height: "8rem",
-      padding: "0.5rem 0",
-      backgroundColor: "#bfbfbf",
+      backgroundColor: "#333333",
+      border: "0.125rem solid #222222",
+      width: "2rem",
+      height: "4.5rem",
+      padding: "0.125rem 0",
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
@@ -81,17 +81,16 @@ class TrafficLight extends BaseElement {
       const light = document.createElement("div");
       const fill = document.createElement("div");
       this.addStyle(light, {
-        border: "2px solid #4f4f4f",
         borderRadius: "100%",
-        height: "2rem",
-        width: "2rem",
+        height: "1.25rem",
+        width: "1.25rem",
       });
       this.addStyle(fill, {
         backgroundColor: color,
         borderRadius: "100%",
-        height: "2rem",
-        opacity: "0.16",
-        width: "2rem",
+        height: "1.25rem",
+        filter: "brightness(0.1)",
+        width: "1.25rem",
       });
       light.id = `${color}-light`;
       fill.id = color;
