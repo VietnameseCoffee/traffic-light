@@ -22,6 +22,10 @@ module.exports = {
         use: "ts-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.png/,
+        type: "asset/resource",
+      },
     ],
   },
   output: {
@@ -36,7 +40,7 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".ts", ".js"],
   },
   watch: true,
   watchOptions: {

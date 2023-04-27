@@ -1,6 +1,6 @@
 import BaseElement from "./base-element";
 
-type light = "red" | "yellow" | "green";
+export type light = "red" | "yellow" | "green";
 
 type colorMap = {
   green: string;
@@ -13,14 +13,15 @@ class TrafficLight extends BaseElement {
   colors: Array<light>;
   currLight: number;
   cycle?: ReturnType<typeof setTimeout>;
+  timeYellowBegan: number;
 
   constructor(parent: HTMLElement) {
     super();
-    const initLights: light[] = ["red", "yellow", "green"];
     this.parent = parent;
-    this.dom = this.#buildLight(initLights);
-    this.colors = initLights;
+    this.colors = this.#getLightsArray();
     this.currLight = 0;
+    this.dom = this.#buildLight(this.colors);
+    this.timeYellowBegan;
 
     const activeLight = this.dom.querySelector(
       `#${this.colors[this.currLight]}`
@@ -49,18 +50,34 @@ class TrafficLight extends BaseElement {
     return this.dom.querySelector(`#${color}`);
   }
 
+  getColor(): light {
+    const lights = this.#getLightsArray();
+    return lights[this.currLight];
+  }
+
+  isRed(): boolean {
+    return this.currLight === 0;
+  }
+
+  isYellow(): boolean {
+    return this.currLight === 1;
+  }
+
   startCycle(): void {
-    this.currLight = 0;
     this.cycle = setTimeout(() => {
+      // red to green
       this.change();
       this.cycle = setTimeout(() => {
+        // green to yellow
+        this.timeYellowBegan = new Date().getTime();
         this.change();
         this.cycle = setTimeout(() => {
+          // yellow to red
           this.change();
           this.startCycle();
-        }, 3000);
-      }, 6000);
-    }, 4000);
+        }, 2000);
+      }, 5000);
+    }, 3000);
   }
 
   getState(): light {
@@ -75,7 +92,7 @@ class TrafficLight extends BaseElement {
    * PRIVATE
    */
 
-  #buildLight(initLights: Array<string>) {
+  #buildLight(initLights: light[]) {
     const trafficLight = document.createElement("div");
     this.addStyle(trafficLight, {
       backgroundColor: "#333333",
@@ -119,6 +136,10 @@ class TrafficLight extends BaseElement {
     trafficLight.append(...lights);
 
     return trafficLight;
+  }
+
+  #getLightsArray(): light[] {
+    return ["red", "yellow", "green"];
   }
 }
 

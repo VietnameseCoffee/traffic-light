@@ -1,21 +1,22 @@
 const s = require("./styles/styles.css");
 
 import Game from "./js/game";
+import Car from "./js/car";
 import TrafficLight from "./js/traffic_light";
 
 const app = document.getElementById("app");
+const pole = app.querySelector(".pole") as HTMLElement;
 
-const game = new Game(app);
+const trafficLight = new TrafficLight(pole);
+const game = new Game(app, Car, trafficLight);
 
-const buttons = document.getElementById("buttons");
-const root = document.querySelector(".pole") as HTMLElement;
+game.start();
 
-const startButton = document.createElement("button");
+const startButton = document.getElementById("start");
 startButton.onclick = () => game.trafficLight.startCycle();
-startButton.innerText = "Start";
 
-const endButton = document.createElement("button");
+const endButton = document.getElementById("end");
 endButton.onclick = () => game.trafficLight.stopCycle();
-endButton.innerText = "End";
-buttons.append(startButton);
-buttons.append(endButton);
+
+const addButton = document.getElementById("add");
+addButton.onclick = () => game.addCar();
