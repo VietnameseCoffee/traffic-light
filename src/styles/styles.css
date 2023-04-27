@@ -22,42 +22,43 @@ body {
 }
 
 #app {
-  height: 40rem;
-  width: 50rem;
+  height: 500px;
+  width: 750px;
 }
 
 #backdrop {
-  height: 34rem;
-  width: 50rem;
+  position: relative;
+  height: 500px;
+  width: 750px;
 }
 
 .sky {
   background-color: var(--sky);
-  height: 15rem;
+  height: 200px;
   width: 100%;
 }
 
 .ground {
   position: relative;
   background-color: var(--ground);
-  height: 19rem;
+  height: 300px;
   width: 100%;
   z-index: 2;
 }
 
 .road-h {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 40px;
   background-color: var(--road);
   width: 100%;
-  height: 6rem;
+  height: 100px;
 }
 
 .road-v {
   position: absolute;
-  left: 15rem;
-  height: 16rem;
-  width: 6rem;
+  left: 250px;
+  height: 200px;
+  width: 100px;
   fill: var(--road);
 }
 
@@ -76,18 +77,18 @@ body {
 }
 
 .intersection {
-  height: 6rem;
-  width: 6rem;
+  height: 100px;
+  width: 100px;
   background-color: var(--road);
   position: absolute;
-  bottom: 2.5rem;
-  left: 15.25rem;
+  bottom: 40px;
+  left: 250px;
 }
 
 .pole-bottom {
-  width: 0.5rem;
+  width: 8px;
   background-color: var(--dark);
-  height: 3rem;
+  height: 48px;
 }
 
 .pole-container {
@@ -95,16 +96,16 @@ body {
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 1.5rem;
-  left: 12.5rem;
+  top: 24px;
+  left: 200px;
 }
 
 .sun {
-  width: 4rem;
-  height: 4rem;
+  width: 60px;
+  height: 60px;
   background-color: var(--divider);
   border-radius: 50%;
   position: absolute;
-  top: 6rem;
-  right: 16rem;
+  top: 40px;
+  right: 200px;
 }

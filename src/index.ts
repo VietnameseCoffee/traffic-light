@@ -1,23 +1,21 @@
 const s = require("./styles/styles.css");
 
-import type { Style } from "./js/base-element";
-import Backdrop from "./js/backdrop";
+import Game from "./js/game";
 import TrafficLight from "./js/traffic_light";
 
-console.log("hello type");
+const app = document.getElementById("app");
 
-new Backdrop();
+const game = new Game(app);
 
+const buttons = document.getElementById("buttons");
 const root = document.querySelector(".pole") as HTMLElement;
-const light = new TrafficLight(root);
-light.append();
 
-// const startButton = document.createElement("button");
-// startButton.onclick = () => light.startCycle();
-// startButton.innerText = "Start";
+const startButton = document.createElement("button");
+startButton.onclick = () => game.trafficLight.startCycle();
+startButton.innerText = "Start";
 
-// const endButton = document.createElement("button");
-// endButton.onclick = () => light.stopCycle();
-// endButton.innerText = "End";
-// root.append(startButton);
-// root.append(endButton);
+const endButton = document.createElement("button");
+endButton.onclick = () => game.trafficLight.stopCycle();
+endButton.innerText = "End";
+buttons.append(startButton);
+buttons.append(endButton);

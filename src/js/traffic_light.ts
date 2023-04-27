@@ -1,22 +1,29 @@
 import BaseElement from "./base-element";
 
+type light = "red" | "yellow" | "green";
+
+type colorMap = {
+  green: string;
+  red: string;
+  yellow: string;
+};
 class TrafficLight extends BaseElement {
   parent: HTMLElement;
   dom: HTMLElement;
-  colors: Array<string>;
-  light: number;
+  colors: Array<light>;
+  currLight: number;
   cycle?: ReturnType<typeof setTimeout>;
 
   constructor(parent: HTMLElement) {
     super();
-    const initLights = ["red", "yellow", "green"];
+    const initLights: light[] = ["red", "yellow", "green"];
     this.parent = parent;
-    this.dom = this.buildLight(initLights);
+    this.dom = this.#buildLight(initLights);
     this.colors = initLights;
-    this.light = 0;
+    this.currLight = 0;
 
     const activeLight = this.dom.querySelector(
-      `#${this.colors[this.light]}`
+      `#${this.colors[this.currLight]}`
     ) as HTMLElement;
     this.addStyle(activeLight, {
       filter: "brightness(1)",
@@ -28,11 +35,12 @@ class TrafficLight extends BaseElement {
   }
 
   change(): void {
-    this.light = (this.light + (this.colors.length - 1)) % this.colors.length;
+    this.currLight =
+      (this.currLight + (this.colors.length - 1)) % this.colors.length;
 
     this.colors.forEach((color, i) => {
       const light = this.getLight(color);
-      const filter = i === this.light ? "brightness(1)" : "brightness(0.1)";
+      const filter = i === this.currLight ? "brightness(1)" : "brightness(0.1)";
       this.addStyle(light, { filter });
     });
   }
@@ -42,7 +50,7 @@ class TrafficLight extends BaseElement {
   }
 
   startCycle(): void {
-    this.light = 0;
+    this.currLight = 0;
     this.cycle = setTimeout(() => {
       this.change();
       this.cycle = setTimeout(() => {
@@ -55,7 +63,11 @@ class TrafficLight extends BaseElement {
     }, 4000);
   }
 
-  stopCycle() {
+  getState(): light {
+    return this.colors[this.currLight];
+  }
+
+  stopCycle(): void {
     clearTimeout(this.cycle);
   }
 
@@ -63,34 +75,40 @@ class TrafficLight extends BaseElement {
    * PRIVATE
    */
 
-  buildLight(initLights: Array<string>) {
+  #buildLight(initLights: Array<string>) {
     const trafficLight = document.createElement("div");
     this.addStyle(trafficLight, {
       backgroundColor: "#333333",
-      border: "0.125rem solid #222222",
-      width: "2rem",
-      height: "4.5rem",
-      padding: "0.125rem 0",
+      border: "2px solid #222222",
+      width: "36px",
+      height: "72px",
+      padding: "2px 0",
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
       alignItems: "center",
     });
 
-    const lights = initLights.map((color) => {
+    const colorMap: colorMap = {
+      green: "#30ff30",
+      red: "red",
+      yellow: "yellow",
+    };
+
+    const lights = initLights.map((color: light) => {
       const light = document.createElement("div");
       const fill = document.createElement("div");
       this.addStyle(light, {
         borderRadius: "100%",
-        height: "1.25rem",
-        width: "1.25rem",
+        height: "20px",
+        width: "20px",
       });
       this.addStyle(fill, {
-        backgroundColor: color,
+        backgroundColor: colorMap[color],
         borderRadius: "100%",
-        height: "1.25rem",
+        height: "20px",
         filter: "brightness(0.1)",
-        width: "1.25rem",
+        width: "20px",
       });
       light.id = `${color}-light`;
       fill.id = color;
