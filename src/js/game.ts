@@ -1,3 +1,5 @@
+import type { model } from "./car";
+
 import Car from "./car";
 import BaseElement from "./base-element";
 import TrafficLight from "./traffic_light";
@@ -27,9 +29,9 @@ class Game extends BaseElement {
     this.junction = junction;
   }
 
-  addCar() {
+  addCar(model: model) {
     if (this.lane1.length > 10) return;
-    const newCar = new this.Car("slow");
+    const newCar = new this.Car(model);
     this.lane1.push(newCar);
     this.road.append(newCar.element);
     newCar.yAxis = -14;
@@ -37,16 +39,16 @@ class Game extends BaseElement {
 
   start() {
     this.#moveSlow();
+    this.#moveMedium();
+    this.#moveFast();
     this.#clearCar();
-    // this.#moveFast();
   }
 
   /**********************  PRIVATE  **********************/
 
   #moveSlow = (): void => {
-    let car: Car;
     let prevCarEnd = -100000;
-    for (car of this.lane1) {
+    for (let car of this.lane1) {
       if (car.model === "slow" && this.#canMove(car, prevCarEnd)) {
         prevCarEnd = car.move() + car.length;
       }
@@ -57,14 +59,42 @@ class Game extends BaseElement {
     window.requestAnimationFrame(this.#moveSlow);
   };
 
+  #moveMedium = (): void => {
+    setTimeout(() => {
+      let prevCarEnd = -100000;
+      for (let car of this.lane1) {
+        if (car.model === "medium" && this.#canMove(car, prevCarEnd)) {
+          prevCarEnd = car.move() + car.length;
+        }
+        prevCarEnd = car.element.offsetLeft + car.length;
+        car.vibrate();
+      }
+
+      this.#moveMedium();
+    }, 5);
+  };
+
+  #moveFast(): void {
+    setInterval(() => {
+      let prevCarEnd = -100000;
+      for (let car of this.lane1) {
+        if (car.model === "fast" && this.#canMove(car, prevCarEnd)) {
+          prevCarEnd = car.move() + car.length;
+        }
+        prevCarEnd = car.element.offsetLeft + car.length;
+        car.vibrate();
+      }
+    }, 5);
+  }
+
   #clearCar = () => {
     setInterval(() => {
       const firstCar = this.lane1[0];
-      if (firstCar && firstCar.element.offsetLeft < -200) {
+      if (firstCar && firstCar.element.offsetLeft < -120) {
         firstCar.element.remove();
         this.lane1.shift();
       }
-    }, 1000);
+    }, 500);
   };
 
   /**********************  HELPERS  **********************/

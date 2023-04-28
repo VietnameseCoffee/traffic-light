@@ -18,5 +18,11 @@ startButton.onclick = () => game.trafficLight.startCycle();
 const endButton = document.getElementById("end");
 endButton.onclick = () => game.trafficLight.stopCycle();
 
-const addButton = document.getElementById("add");
-addButton.onclick = () => game.addCar();
+const addSlowCarButton = document.getElementById("add-slow");
+addSlowCarButton.onclick = () => game.addCar("slow");
+
+const addMediumCarButton = document.getElementById("add-medium");
+addMediumCarButton.onclick = () => game.addCar("medium");
+
+const addFastCarButton = document.getElementById("add-fast");
+addFastCarButton.onclick = () => game.addCar("fast");

@@ -1,6 +1,8 @@
 import Bug from "../assets/bug.png";
+import Coupe from "../assets/coupe.png";
+import Taxi from "../assets/taxi.png";
 
-type model = "slow" | "medium" | "fast";
+export type model = "slow" | "medium" | "fast";
 type direction = "left" | "right";
 
 class Car {
@@ -13,7 +15,7 @@ class Car {
   constructor(model: model, direction: direction = "left") {
     this.element = this.#genElement(model);
     this.model = model;
-    this.length = 117;
+    this.length = 110;
     this.vibration = false;
   }
 
@@ -34,9 +36,15 @@ class Car {
   /**********************  PRIVATE  **********************/
 
   #genElement(model: model): HTMLElement {
+    const map = {
+      slow: Bug,
+      medium: Taxi,
+      fast: Coupe,
+    };
+
     const car = document.createElement("img");
     car.className = "car";
-    car.src = Bug;
+    car.src = map[model];
     car.alt = "";
     car.style.left = "770px";
     car.style.top = "14px";
