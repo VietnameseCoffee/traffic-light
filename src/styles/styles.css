@@ -26,6 +26,7 @@ img {
 }
 
 #app {
+  position: relative;
   height: 500px;
   width: 750px;
   overflow: hidden;
@@ -35,6 +36,14 @@ img {
   position: relative;
   height: 500px;
   width: 750px;
+}
+
+.app {
+  filter: brightness(0.3);
+}
+
+.hidden {
+  display: none;
 }
 
 .sky {
@@ -120,4 +129,71 @@ img {
   width: 90px;
   height: 46px;
   z-index: 2;
+}
+
+#modal {
+  border-radius: 5px;
+  border: 2px solid #8a1bf1;
+  background-color: #eaba61;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 550px;
+  height: 450px;
+  z-index: 3;
+}
+
+.border {
+  box-sizing: border-box;
+  border: 8px solid #efa41a;
+  border-radius: 5px;
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  box-sizing: border-box;
+  border: 2px solid #8a1bf1;
+  border-radius: 2px;
+  height: 100%;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+/************* Animations **************/
+
+.on {
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-name: brighten;
+  filter: brightness(1);
+  transition: 3s;
+}
+
+@keyframes brighten {
+  from {
+    filter: brightness(0.3);
+  }
+
+  to {
+    filter: brightness(1);
+  }
+}
+
+.on .sun {
+  animation-duration: 2.6s;
+  animation-iteration-count: 1;
+  animation-name: rise;
+}
+
+@keyframes rise {
+  from {
+    translate: -100px 170px;
+  }
+
+  to {
+    translate: 0 0;
+  }
 }

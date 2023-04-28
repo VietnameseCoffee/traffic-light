@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="app">
         <div id="backdrop">
             <div class="sky"></div>
             <div class="sun"></div>
@@ -26,9 +26,36 @@
             </div>
             </div>
         </div>
-        <div id="buttons">
-            <button id="start" class="btn">Start Light</button>
-            <button id="end" class="btn">End Cycle</button>
+        <div id="modal">
+            <div class="border">
+                <div class="content">
+                    <h1>Traffic</h1>
+                    <div>
+                        <p>
+                            Control a traffic light as cars zoom by on their way to work in New Townsville.
+                        </p>
+                        <p>
+                            Some cars are faster than others like the sports car zooming by the old Bug
+                        </p>
+                        <p>
+                            If they're in the same lane they'll have to slow down and follow. Unfortunately
+                            New Townsville does not allow lane changes, so cars have to tail slower cars.
+                            How this town survives is a mystery
+                        </p>
+                        <p>
+                            Cars move using several types of JavaScript methods, specifically
+                            requestAnimationFrame, setTimeout, setInterval. It showcases the
+                            different callback rates when they get called in the event loop,
+                            most notably between requestAnimationFrame and setTimeout/setInterval.
+                        </p>
+                        <button id="init">START</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="buttons" class="hidden">
+            <button id="light-start" class="btn">Start Light</button>
+            <button id="light-stop" class="btn">End Light</button>
             <button id="lane" class="btn">Lane 1</button>
             <button id="add-slow" class="btn">Add Slow</button>
             <button id="add-medium" class="btn">Add Medium</button>
