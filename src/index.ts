@@ -15,6 +15,7 @@ game.start();
 const initGameButton = document.getElementById("init") as HTMLButtonElement;
 const startButton = document.getElementById("light-start") as HTMLButtonElement;
 const stopButtonn = document.getElementById("light-stop") as HTMLButtonElement;
+const autoButton = document.getElementById("auto") as HTMLButtonElement;
 const laneButton = document.getElementById("lane");
 const addSlowCarButton = document.getElementById("add-slow");
 const addMediumCarButton = document.getElementById("add-medium");
@@ -24,11 +25,10 @@ stopButtonn.disabled = true;
 
 initGameButton.onclick = () => {
   const modal = document.getElementById("modal");
-  const buttons = document.querySelector(".hidden")?.classList.remove("hidden");
+  document.querySelector(".hidden")?.classList.remove("hidden");
   modal.remove();
   app.classList.add("on");
 };
-
 startButton.onclick = () => {
   startButton.disabled = true;
   stopButtonn.disabled = false;
@@ -42,6 +42,15 @@ stopButtonn.onclick = () => {
 laneButton.onclick = () => {
   const lane = game.changeLane();
   laneButton.innerText = `Lane ${lane + 1}`;
+};
+autoButton.onclick = () => {
+  if (autoButton.dataset.on === "on") {
+    autoButton.dataset.on = "off";
+    game.stopAutoGen();
+  } else {
+    autoButton.dataset.on = "on";
+    game.triggerAutoGen();
+  }
 };
 
 addSlowCarButton.onclick = () => game.addCar("slow");

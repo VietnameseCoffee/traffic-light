@@ -5,6 +5,7 @@ import BaseElement from "./base-element";
 import TrafficLight from "./traffic_light";
 
 class Game extends BaseElement {
+  autoGen?: ReturnType<typeof setTimeout>;
   Car: typeof Car;
   currentLane: number;
   lane1: Car[];
@@ -31,6 +32,7 @@ class Game extends BaseElement {
     this.lane2 = [];
     this.road = road;
     this.junction = junction;
+    this.autoGen = setTimeout(() => {}, 0);
   }
 
   addCar(model: model) {
@@ -59,7 +61,29 @@ class Game extends BaseElement {
     this.#clearCars();
   }
 
+  stopAutoGen() {
+    clearTimeout(this.autoGen);
+  }
+
+  triggerAutoGen() {
+    this.autoGen = this.#autoGenCar();
+  }
+
   /**********************  PRIVATE  **********************/
+
+  #autoGenCar(): ReturnType<typeof setTimeout> {
+    const time = Math.floor(Math.random() * 5000) + 1000;
+    const models: model[] = ["slow", "medium", "fast"];
+    return setTimeout(() => {
+      const oldLane = this.currentLane;
+      const lane = Math.random() > 0.5 ? 0 : 1;
+      const model: model = models[Math.floor(Math.random() * 3)];
+      this.currentLane = lane;
+      this.addCar(model);
+      this.currentLane = oldLane;
+      this.autoGen = this.#autoGenCar();
+    }, time);
+  }
 
   #moveSlow = (): void => {
     this.#evalLane(this.lane1, "slow");
