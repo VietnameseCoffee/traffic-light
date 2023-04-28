@@ -63,6 +63,10 @@ class TrafficLight extends BaseElement {
     return this.currLight === 1;
   }
 
+  isGreen(): boolean {
+    return this.currLight === 2;
+  }
+
   startCycle(): void {
     this.cycle = setTimeout(() => {
       // red to green
@@ -76,8 +80,8 @@ class TrafficLight extends BaseElement {
           this.change();
           this.startCycle();
         }, 2000);
-      }, 5000);
-    }, 3000);
+      }, 7000);
+    }, 4000);
   }
 
   getState(): light {
@@ -86,6 +90,21 @@ class TrafficLight extends BaseElement {
 
   stopCycle(): void {
     clearTimeout(this.cycle);
+    if (this.isRed()) return;
+
+    this.timeYellowBegan = new Date().getTime();
+    if (this.isYellow()) {
+      setTimeout(() => {
+        this.change();
+      }, 2000);
+    }
+
+    if (this.isGreen()) {
+      this.change();
+      setTimeout(() => {
+        this.change();
+      }, 2050);
+    }
   }
 
   /*****************************************

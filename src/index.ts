@@ -12,11 +12,20 @@ const game = new Game(app, Car, trafficLight);
 
 game.start();
 
-const startButton = document.getElementById("start");
-startButton.onclick = () => game.trafficLight.startCycle();
+const startButton = document.getElementById("start") as HTMLButtonElement;
+startButton.onclick = () => {
+  startButton.disabled = true;
+  endButton.disabled = false;
+  game.trafficLight.startCycle();
+};
 
-const endButton = document.getElementById("end");
-endButton.onclick = () => game.trafficLight.stopCycle();
+const endButton = document.getElementById("end") as HTMLButtonElement;
+endButton.onclick = () => {
+  endButton.disabled = true;
+  game.trafficLight.stopCycle();
+  setTimeout(() => (startButton.disabled = false), 2050);
+};
+endButton.disabled = true;
 
 const laneButton = document.getElementById("lane");
 laneButton.onclick = () => {
