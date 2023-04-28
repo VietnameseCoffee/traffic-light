@@ -18,6 +18,12 @@ startButton.onclick = () => game.trafficLight.startCycle();
 const endButton = document.getElementById("end");
 endButton.onclick = () => game.trafficLight.stopCycle();
 
+const laneButton = document.getElementById("lane");
+laneButton.onclick = () => {
+  const lane = game.changeLane();
+  laneButton.innerText = `Lane ${lane + 1}`;
+};
+
 const addSlowCarButton = document.getElementById("add-slow");
 addSlowCarButton.onclick = () => game.addCar("slow");
 

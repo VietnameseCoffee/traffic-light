@@ -6,7 +6,9 @@ import TrafficLight from "./traffic_light";
 
 class Game extends BaseElement {
   Car: typeof Car;
+  currentLane: number;
   lane1: Car[];
+  lane2: Car[];
   junction: HTMLElement;
   trafficLight: TrafficLight;
   road: HTMLElement;
@@ -24,76 +26,68 @@ class Game extends BaseElement {
     this.trafficLight = trafficLight;
     this.trafficLight.append();
 
+    this.currentLane = 0;
     this.lane1 = [];
+    this.lane2 = [];
     this.road = road;
     this.junction = junction;
   }
 
   addCar(model: model) {
-    if (this.lane1.length > 10) return;
+    if (this.lane1.length + this.lane2.length > 16) return;
     const newCar = new this.Car(model);
-    this.lane1.push(newCar);
+
+    if (this.currentLane === 0) {
+      this.lane1.push(newCar);
+      newCar.yAxis = -14;
+    } else if (this.currentLane === 1) {
+      this.lane2.push(newCar);
+      newCar.yAxis = 34;
+    }
     this.road.append(newCar.element);
-    newCar.yAxis = -14;
+  }
+
+  changeLane(): number {
+    this.currentLane = (this.currentLane + 1) % 2;
+    return this.currentLane;
   }
 
   start() {
     this.#moveSlow();
     this.#moveMedium();
     this.#moveFast();
-    this.#clearCar();
+    this.#clearCars();
   }
 
   /**********************  PRIVATE  **********************/
 
   #moveSlow = (): void => {
-    let prevCarEnd = -100000;
-    for (let car of this.lane1) {
-      if (car.model === "slow" && this.#canMove(car, prevCarEnd)) {
-        prevCarEnd = car.move() + car.length;
-      }
-      prevCarEnd = car.element.offsetLeft + car.length;
-      car.vibrate();
-    }
+    this.#evalLane(this.lane1, "slow");
+    this.#evalLane(this.lane2, "slow");
 
     window.requestAnimationFrame(this.#moveSlow);
   };
 
   #moveMedium = (): void => {
     setTimeout(() => {
-      let prevCarEnd = -100000;
-      for (let car of this.lane1) {
-        if (car.model === "medium" && this.#canMove(car, prevCarEnd)) {
-          prevCarEnd = car.move() + car.length;
-        }
-        prevCarEnd = car.element.offsetLeft + car.length;
-        car.vibrate();
-      }
+      this.#evalLane(this.lane1, "medium");
+      this.#evalLane(this.lane2, "medium");
 
       this.#moveMedium();
-    }, 5);
+    }, 7);
   };
 
   #moveFast(): void {
     setInterval(() => {
-      let prevCarEnd = -100000;
-      for (let car of this.lane1) {
-        if (car.model === "fast" && this.#canMove(car, prevCarEnd)) {
-          prevCarEnd = car.move() + car.length;
-        }
-        prevCarEnd = car.element.offsetLeft + car.length;
-        car.vibrate();
-      }
-    }, 5);
+      this.#evalLane(this.lane1, "fast");
+      this.#evalLane(this.lane2, "fast");
+    }, 7);
   }
 
-  #clearCar = () => {
+  #clearCars = () => {
     setInterval(() => {
-      const firstCar = this.lane1[0];
-      if (firstCar && firstCar.element.offsetLeft < -120) {
-        firstCar.element.remove();
-        this.lane1.shift();
-      }
+      this.#clearLane(this.lane1);
+      this.#clearLane(this.lane2);
     }, 500);
   };
 
@@ -122,6 +116,25 @@ class Game extends BaseElement {
     }
 
     return canMove;
+  };
+
+  #clearLane(lane: Car[]) {
+    const car = lane[0];
+    if (car && car.element.offsetLeft < -120) {
+      car.element.remove();
+      lane.shift();
+    }
+  }
+
+  #evalLane = (lane: Car[], filter: model) => {
+    let prevCarEnd = -100000;
+    for (let car of lane) {
+      if (car.model === filter && this.#canMove(car, prevCarEnd)) {
+        prevCarEnd = car.move() + car.length;
+      }
+      prevCarEnd = car.element.offsetLeft + car.length;
+      car.vibrate();
+    }
   };
 
   #haveTimeToContinue = (trafficLight: TrafficLight): boolean => {

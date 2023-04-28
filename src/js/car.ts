@@ -15,7 +15,7 @@ class Car {
   constructor(model: model, direction: direction = "left") {
     this.element = this.#genElement(model);
     this.model = model;
-    this.length = 110;
+    this.length = 90;
     this.vibration = false;
   }
 
