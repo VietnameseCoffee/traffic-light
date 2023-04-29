@@ -4,6 +4,9 @@
 * TAGS
 */
 
+* {
+  user-select: none;
+}
 html {
   height: 100%;
   padding: 0;
@@ -25,7 +28,6 @@ a {
 }
 
 img {
-  user-select: none;
   -webkit-user-drag: none;
 }
 
@@ -165,12 +167,19 @@ img {
 }
 
 .spawn-marker {
-  background: linear-gradient(to right, rgba(255, 0, 0, 0), rgb(255 110 110));
   height: 49px;
   position: absolute;
   width: 20px;
   right: -20px;
   z-index: 3;
+}
+
+.spawn-auto {
+  background: linear-gradient(to right, rgba(255, 0, 0, 0), rgb(44 236 211));
+}
+
+.spawn-user {
+  background: linear-gradient(to right, rgba(255, 0, 0, 0), rgb(255 110 110));
 }
 
 .spawn-1 {
@@ -220,8 +229,8 @@ img {
 }
 
 .sun {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   background-color: var(--sun);
   border-radius: 50%;
   position: absolute;
@@ -233,11 +242,11 @@ img {
   background-image: url(../assets/cloud.svg);
   background-repeat: no-repeat;
   background-size: cover;
+  left: 480px;
   height: 60px;
   position: absolute;
-  width: 95px;
   top: 55px;
-  left: 480px;
+  width: 95px;
   z-index: 2;
 }
 
@@ -252,6 +261,18 @@ img {
   width: 57px;
   top: 110px;
   left: 800px;
+}
+
+.skyline {
+  background-image: url(../assets/skyline.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 79px;
+  left: 326px;
+  opacity: 0.76;
+  position: absolute;
+  top: 127px;
+  width: 173px;
 }
 
 .car {
@@ -363,7 +384,13 @@ img {
   }
 }
 
-.spawn-marker {
+.spawn-auto {
+  animation-duration: 1.6s;
+  animation-iteration-count: 1;
+  animation-name: waffle;
+}
+
+.spawn-user {
   animation-duration: 2s;
   animation-iteration-count: infinite;
   animation-name: waffle;

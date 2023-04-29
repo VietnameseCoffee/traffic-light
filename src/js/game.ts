@@ -37,8 +37,8 @@ class Game extends BaseElement {
     this.autoGen = setTimeout(() => {}, 0);
   }
 
-  addCar(model: model) {
-    if (this.lane1.length + this.lane2.length > 16) return;
+  addCar(model: model): boolean {
+    if (this.lane1.length + this.lane2.length > 20) return false;
     const newCar = new this.Car(model);
 
     if (this.currentLane === 0) {
@@ -49,16 +49,14 @@ class Game extends BaseElement {
       newCar.yAxis = 34;
     }
     this.road.append(newCar.element);
+    return true;
   }
 
   changeLane(): number {
     this.currentLane = (this.currentLane + 1) % 2;
-    const marker = this.app.querySelector(".spawn-marker");
-    marker?.classList.toggle("spawn-1");
-    marker?.classList.toggle("spawn-2");
-    marker.classList.remove("spawn-marker");
-
-    setTimeout(() => marker.classList.add("spawn-marker"), 0);
+    const userMarker = this.app.querySelector("#spawn-user");
+    userMarker?.classList.toggle("spawn-1");
+    userMarker?.classList.toggle("spawn-2");
     return this.currentLane;
   }
 
@@ -92,18 +90,26 @@ class Game extends BaseElement {
   /**********************  PRIVATE  **********************/
 
   #autoGenCar(): ReturnType<typeof setTimeout> {
-    const time = Math.floor(Math.random() * 5000) + 1000;
+    const time = Math.floor(Math.random() * 5000) + 1600;
     const models: model[] = ["slow", "medium", "fast"];
     return setTimeout(() => {
       const oldLane = this.currentLane;
       const lane = Math.random() > 0.5 ? 0 : 1;
       const model: model = models[Math.floor(Math.random() * 3)];
       this.currentLane = lane;
-      this.addCar(model);
+      const result = this.addCar(model);
+      result && this.#showIndicator(lane);
       this.currentLane = oldLane;
       this.autoGen = this.#autoGenCar();
     }, time);
   }
+
+  #clearCars = () => {
+    setInterval(() => {
+      this.#clearLane(this.lane1);
+      this.#clearLane(this.lane2);
+    }, 500);
+  };
 
   #moveSlow = (): void => {
     this.#evalLane(this.lane1, "slow");
@@ -128,12 +134,16 @@ class Game extends BaseElement {
     }, 7);
   }
 
-  #clearCars = () => {
-    setInterval(() => {
-      this.#clearLane(this.lane1);
-      this.#clearLane(this.lane2);
-    }, 500);
-  };
+  #showIndicator(lane: number): void {
+    const autoMarker = this.app.querySelector("#spawn-auto");
+    const markerLane = lane === 0 ? "spawn-1" : "spawn-2";
+    autoMarker.classList.add("spawn-auto");
+    autoMarker.classList.add(markerLane);
+    setTimeout(() => {
+      autoMarker.classList.remove(`spawn-auto`);
+      autoMarker.classList.remove(markerLane);
+    }, 2000);
+  }
 
   /**********************  HELPERS  **********************/
 
