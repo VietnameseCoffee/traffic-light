@@ -1,5 +1,9 @@
 @import "variables.css";
 
+/**************************************
+* TAGS
+*/
+
 html {
   height: 100%;
   padding: 0;
@@ -21,9 +25,9 @@ img {
   -webkit-user-drag: none;
 }
 
-.test {
-  border: 1px solid blue;
-}
+/**************************************
+* IDS
+*/
 
 #app {
   position: relative;
@@ -45,9 +49,16 @@ img {
   line-height: 40px;
 }
 
-.app {
-  filter: brightness(0.3);
+#init {
+  display: block;
+  margin: 20px auto 0;
+  padding: 5px;
+  width: 160px;
 }
+
+/**************************************
+* BUTTONS
+*/
 
 .btn {
   border: 2px solid var(--modal-border-out);
@@ -78,6 +89,14 @@ img {
 
 .hidden {
   visibility: hidden;
+}
+
+/**************************************
+* GAME
+*/
+
+.app {
+  filter: brightness(0.3);
 }
 
 .sky {
@@ -182,6 +201,10 @@ img {
   z-index: 2;
 }
 
+/**************************************
+* MODAL
+*/
+
 #modal {
   border-radius: 5px;
   border: 2px solid var(--modal-border-out);
@@ -208,12 +231,15 @@ img {
   background-color: var(--modal);
   border: 2px solid var(--modal-border-out);
   border-radius: 2px;
+  font-size: 14px;
   height: 100%;
   width: 100%;
   padding: 0 1rem;
 }
 
-/************* Animations **************/
+/**************************************
+* ANIMATIONS
+*/
 
 .on {
   animation-duration: 3s;
