@@ -4,11 +4,11 @@ import Game from "./js/game";
 import Car from "./js/car";
 import TrafficLight from "./js/traffic_light";
 
-const app = document.getElementById("app");
-const pole = app.querySelector(".pole") as HTMLElement;
+const view = document.getElementById("view");
+const pole = view.querySelector(".pole") as HTMLElement;
 
 const trafficLight = new TrafficLight(pole);
-const game = new Game(app, Car, trafficLight);
+const game = new Game(view, Car, trafficLight);
 
 game.init();
 
@@ -27,7 +27,7 @@ initGameButton.onclick = () => {
   const modal = document.getElementById("modal");
   document.querySelector(".hidden")?.classList.remove("hidden");
   modal.remove();
-  app.classList.add("on");
+  view.classList.add("on");
 };
 startButton.onclick = () => {
   startButton.disabled = true;

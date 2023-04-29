@@ -29,7 +29,7 @@ img {
 * IDS
 */
 
-#app {
+#view {
   position: relative;
   height: 500px;
   width: var(--app-width);
@@ -43,13 +43,26 @@ img {
 }
 
 #buttons {
+  box-sizing: border-box;
   display: flex;
-  height: 40px;
-  width: var(--app-width);
+  height: 47px;
+  padding-left: 4px;
   line-height: 40px;
 }
 
+#buttons-wrapper {
+  background-color: blanchedalmond;
+  border-bottom: 2px solid #9b9b9b;
+  border-left: 2px solid #9b9b9b;
+  border-right: 2px solid #9b9b9b;
+  box-sizing: border-box;
+  height: 47px;
+  padding-left: 4px;
+  width: var(--app-width);
+}
+
 #init {
+  border-color: var(--modal-border-out);
   display: block;
   margin: 20px auto 0;
   padding: 5px;
@@ -61,7 +74,7 @@ img {
 */
 
 .btn {
-  border: 2px solid var(--modal-border-out);
+  border: 2px solid #848484;
   border-radius: 2px;
   background-color: var(--btn);
   height: 40px;
@@ -76,6 +89,7 @@ img {
 
 .btn:disabled {
   background-color: #cccccc;
+  opacity: 0.8;
   filter: brightness(0.8);
 }
 
