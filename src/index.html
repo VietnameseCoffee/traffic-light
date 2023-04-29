@@ -13,6 +13,7 @@
             <div class="sun"></div>
             <div class="ground">
                 <div class="road-h">
+                    <div class="spawn-marker spawn-1"></div>
                     <div class="divider-h"></div>
                 </div>
                 <svg class="road-v"height="400" width="100">
@@ -54,13 +55,16 @@
             </div>
         </div>
         <div id="buttons" class="hidden">
-            <button id="light-start">Start Light</button>
-            <button id="light-stop">End Light</button>
-            <button id="auto" data-on="off">Auto Make</button>
-            <button id="lane">Lane 1</button>
-            <button id="add-slow">Add Slow</button>
-            <button id="add-medium">Add Medium</button>
-            <button id="add-fast">Add Fast</button>
+            LIGHTS
+            <button class="btn grn" id="light-start">Start</button>
+            <button class="btn red" id="light-stop">Stop</button>
+            ADD CARS
+            <button class="btn" id="auto" data-on="off">Auto Off</button>
+            <button class="btn" id="add-slow">Slow</button>
+            <button class="btn" id="add-medium">Medium</button>
+            <button class="btn" id="add-fast">Fast</button>
+            LANES
+            <button class="btn" id="lane">Top</button>
         </div>
     </div>
 </body>

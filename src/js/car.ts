@@ -46,7 +46,7 @@ class Car {
     car.className = "car";
     car.src = map[model];
     car.alt = "";
-    car.style.left = "770px";
+    car.style.left = "820px";
     car.style.top = "14px";
     return car;
   }

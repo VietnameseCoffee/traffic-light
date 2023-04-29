@@ -5,6 +5,7 @@ import BaseElement from "./base-element";
 import TrafficLight from "./traffic_light";
 
 class Game extends BaseElement {
+  app: HTMLElement;
   autoGen?: ReturnType<typeof setTimeout>;
   Car: typeof Car;
   currentLane: number;
@@ -23,6 +24,7 @@ class Game extends BaseElement {
     const junction = app.querySelector(".intersection") as HTMLElement;
     const road = app.querySelector(".road-h") as HTMLElement;
 
+    this.app = app;
     this.Car = carMaker;
     this.trafficLight = trafficLight;
     this.trafficLight.append();
@@ -51,14 +53,32 @@ class Game extends BaseElement {
 
   changeLane(): number {
     this.currentLane = (this.currentLane + 1) % 2;
+    const marker = this.app.querySelector(".spawn-marker");
+    marker?.classList.toggle("spawn-1");
+    marker?.classList.toggle("spawn-2");
+    marker.classList.remove("spawn-marker");
+
+    setTimeout(() => marker.classList.add("spawn-marker"), 0);
     return this.currentLane;
   }
 
-  start() {
+  init() {
     this.#moveSlow();
     this.#moveMedium();
     this.#moveFast();
     this.#clearCars();
+  }
+
+  isLightRed(): boolean {
+    return this.trafficLight.isRed();
+  }
+
+  startLight(): void {
+    this.trafficLight.startCycle();
+  }
+
+  stopLight(): void {
+    this.trafficLight.stopCycle();
   }
 
   stopAutoGen() {

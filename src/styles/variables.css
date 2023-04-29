@@ -1,7 +1,14 @@
 :root {
-  --sky: #a0ddf5;
-  --ground: #4bc82c;
-  --road: #a1a1a1;
+  --app-width: 800px;
+  --btn: #f9d798;
   --dark: #2d2d2d;
   --divider: #ffff00;
+  --ground: #4bc82c;
+  --green: #20d617;
+  --red: #ff7b7b;
+  --modal-border-in: #efa41a;
+  --modal: #eaba61;
+  --modal-border-out: #8a1bf1;
+  --road: #a1a1a1;
+  --sky: #a0ddf5;
 }

@@ -28,22 +28,56 @@ img {
 #app {
   position: relative;
   height: 500px;
-  width: 750px;
+  width: var(--app-width);
   overflow: hidden;
 }
 
 #backdrop {
   position: relative;
   height: 500px;
-  width: 750px;
+  width: var(--app-width);
+}
+
+#buttons {
+  display: flex;
+  height: 40px;
+  width: var(--app-width);
+  line-height: 40px;
 }
 
 .app {
   filter: brightness(0.3);
 }
 
+.btn {
+  border: 2px solid var(--modal-border-out);
+  border-radius: 2px;
+  background-color: var(--btn);
+  height: 40px;
+  margin: 2px;
+  width: 80px;
+  padding: 0;
+}
+
+.btn:active {
+  filter: brightness(0.9);
+}
+
+.btn:disabled {
+  background-color: #cccccc;
+  filter: brightness(0.8);
+}
+
+.grn {
+  background-color: var(--green);
+}
+
+.red {
+  background-color: var(--red);
+}
+
 .hidden {
-  display: none;
+  visibility: hidden;
 }
 
 .sky {
@@ -74,6 +108,23 @@ img {
   height: 200px;
   width: 100px;
   fill: var(--road);
+}
+
+.spawn-marker {
+  background: linear-gradient(to right, rgba(255, 0, 0, 0), rgb(255 110 110));
+  height: 49px;
+  position: absolute;
+  width: 20px;
+  right: -20px;
+  z-index: 3;
+}
+
+.spawn-1 {
+  top: 1px;
+}
+
+.spawn-2 {
+  top: 51px;
 }
 
 .divider-h {
@@ -133,11 +184,10 @@ img {
 
 #modal {
   border-radius: 5px;
-  border: 2px solid #8a1bf1;
-  background-color: #eaba61;
+  border: 2px solid var(--modal-border-out);
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: calc(50% - 20px);
   transform: translate(-50%, -50%);
 
   width: 550px;
@@ -147,7 +197,7 @@ img {
 
 .border {
   box-sizing: border-box;
-  border: 8px solid #efa41a;
+  border: 8px solid var(--modal-border-in);
   border-radius: 5px;
   height: 100%;
   width: 100%;
@@ -155,7 +205,8 @@ img {
 
 .content {
   box-sizing: border-box;
-  border: 2px solid #8a1bf1;
+  background-color: var(--modal);
+  border: 2px solid var(--modal-border-out);
   border-radius: 2px;
   height: 100%;
   width: 100%;
@@ -194,6 +245,26 @@ img {
   }
 
   to {
+    translate: 0 0;
+  }
+}
+
+.spawn-marker {
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-name: waffle;
+}
+
+@keyframes waffle {
+  0% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: -20px 0px;
+  }
+
+  100% {
     translate: 0 0;
   }
 }

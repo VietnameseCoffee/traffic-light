@@ -73,23 +73,6 @@ class TrafficLight extends BaseElement {
     this.#cycle();
   }
 
-  #cycle(): void {
-    this.cycle = setTimeout(() => {
-      // green to yellow
-      this.timeYellowBegan = new Date().getTime();
-      this.change();
-      this.cycle = setTimeout(() => {
-        // yellow to red
-        this.change();
-        this.cycle = setTimeout(() => {
-          // red to green
-          this.change();
-          this.#cycle();
-        }, 4500);
-      }, 2500);
-    }, 7000);
-  }
-
   getState(): light {
     return this.colors[this.currLight];
   }
@@ -161,6 +144,23 @@ class TrafficLight extends BaseElement {
     trafficLight.append(...lights);
 
     return trafficLight;
+  }
+
+  #cycle(): void {
+    this.cycle = setTimeout(() => {
+      // green to yellow
+      this.timeYellowBegan = new Date().getTime();
+      this.change();
+      this.cycle = setTimeout(() => {
+        // yellow to red
+        this.change();
+        this.cycle = setTimeout(() => {
+          // red to green
+          this.change();
+          this.#cycle();
+        }, 4500);
+      }, 2500);
+    }, 7000);
   }
 
   #getLightsArray(): light[] {

@@ -10,7 +10,7 @@ const pole = app.querySelector(".pole") as HTMLElement;
 const trafficLight = new TrafficLight(pole);
 const game = new Game(app, Car, trafficLight);
 
-game.start();
+game.init();
 
 const initGameButton = document.getElementById("init") as HTMLButtonElement;
 const startButton = document.getElementById("light-start") as HTMLButtonElement;
@@ -32,24 +32,31 @@ initGameButton.onclick = () => {
 startButton.onclick = () => {
   startButton.disabled = true;
   stopButtonn.disabled = false;
-  game.trafficLight.startCycle();
+  game.startLight();
 };
 stopButtonn.onclick = () => {
   stopButtonn.disabled = true;
-  game.trafficLight.stopCycle();
-  setTimeout(() => (startButton.disabled = false), 2050);
+  game.stopLight();
+  if (game.isLightRed()) {
+    startButton.disabled = false;
+  } else {
+    setTimeout(() => (startButton.disabled = false), 2000);
+  }
 };
 laneButton.onclick = () => {
   const lane = game.changeLane();
-  laneButton.innerText = `Lane ${lane + 1}`;
+  const text = lane === 0 ? "Top" : "Bottom";
+  laneButton.innerText = text;
 };
 autoButton.onclick = () => {
   if (autoButton.dataset.on === "on") {
     autoButton.dataset.on = "off";
+    autoButton.innerText = "Auto Off";
     game.stopAutoGen();
   } else {
     autoButton.dataset.on = "on";
     game.triggerAutoGen();
+    autoButton.innerText = "Auto On";
   }
 };
 
