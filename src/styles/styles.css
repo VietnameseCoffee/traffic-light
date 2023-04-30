@@ -51,7 +51,7 @@ img {
 #buttons {
   box-sizing: border-box;
   display: flex;
-  height: 47px;
+  height: 50px;
   padding-left: 4px;
   line-height: 40px;
 }
@@ -62,7 +62,7 @@ img {
   border-left: 2px solid #9b9b9b;
   border-right: 2px solid #9b9b9b;
   box-sizing: border-box;
-  height: 47px;
+  height: 50px;
   padding-left: 4px;
   width: var(--app-width);
 }
@@ -84,7 +84,7 @@ img {
   border-radius: 2px;
   background-color: var(--btn);
   height: 40px;
-  margin: 2px;
+  margin: 4px 2px 0;
   width: 80px;
   padding: 0;
 }
@@ -132,7 +132,7 @@ img {
 * GAME
 */
 
-.app {
+.view {
   filter: brightness(0.3);
 }
 
