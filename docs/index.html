@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light Simulator</title>
+<script defer src="bundle.js"></script></head>
+<body>
+    <div id="app">
+        <div id="view" class="view">
+            <div id="backdrop">
+                <div class="sky"></div>
+                <div class="sun"></div>
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="skyline"></div>
+                <div class="ground">
+                    <div class="road-h">
+                        <div id="spawn-user" class="spawn-marker spawn-user spawn-1"></div>
+                        <div id="spawn-auto" class="spawn-marker"></div>
+                        <div class="divider-h"></div>
+                    </div>
+                    <svg class="road-v"height="400" width="100">
+                        <polygon points="20,0 80,0 100,400 0,400" />
+                      </svg>
+                    <div class="pole-container">
+                        <div class="pole"></div>
+                        <div class="pole-bottom"></div>
+                    </div>
+                    <div class="intersection"></div>
+                </div>
+                </div>
+            </div>
+            <div id="modal">
+                <div class="border">
+                    <div class="content">
+                        <h1>Traffic Light Simulator</h1>
+                        <div>
+                            <p>
+                                Control a traffic light as cars zoom by on their way to work in New Townsville.
+                            </p>
+                            <p>
+                                Some cars are faster than others like the sports car zooming by the old Bug
+                            </p>
+                            <p>
+                                If they're in the same lane they'll have to slow down and follow. Unfortunately
+                                New Townsville does not allow lane changes, so cars have to tail slower cars.
+                                How this town survives is a mystery
+                            </p>
+                            <p>
+                                Cars move using several types of JavaScript methods, specifically
+                                requestAnimationFrame, setTimeout, setInterval. It showcases the
+                                different callback rates when they get called in the event loop,
+                                most notably between requestAnimationFrame and setTimeout/setInterval.
+                            </p>
+                            Resources:
+                            <div>
+                                <a href="https://developer.mozilla.org/en-US/docs/Web/API/setInterval">Mozilla Docs setInterval</a>
+                            </div>
+                            <div>
+                                <a href="https://developer.mozilla.org/en-US/docs/Web/API/setTimeout">Mozilla Docs setTimeout</a>
+                            </div>
+                            <div>
+                                <a href="https://www.macarthur.me/posts/navigating-the-event-loop">Event Loop</a>
+                            </div>
+                            <div>
+                                SVGs and icons by W3, IconScout, OpenGameArt, and Shutterstock
+                            </div>
+                            <button class="btn" id="init"init>START</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="buttons-wrapper">
+
+                <div id="buttons" class="hidden">
+                    LIGHTS
+                    <button class="btn grn" id="light-start">Start</button>
+                    <button class="btn red" id="light-stop">Stop</button>
+                    ADD CARS
+                    <button class="btn" id="auto" data-on="off">Auto Off</button>
+                    <button class="btn" id="add-slow">
+                        <div class="btn-car slow"></div>
+                    </button>
+                    <button class="btn" id="add-medium">
+                        <div class="btn-car medium"></div>
+                    </button>
+                    <button class="btn" id="add-fast">
+                        <div class="btn-car fast"></div>
+                    </button>
+                    LANES
+                    <button class="btn" id="lane">Top</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
