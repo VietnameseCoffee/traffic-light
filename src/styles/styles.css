@@ -247,7 +247,6 @@ img {
   position: absolute;
   top: 55px;
   width: 95px;
-  z-index: 2;
 }
 
 .cloud-1 {
@@ -296,7 +295,7 @@ img {
 
   width: 550px;
   height: 450px;
-  z-index: 3;
+  z-index: 2;
 }
 
 .border {
@@ -327,7 +326,6 @@ img {
   animation-iteration-count: 1;
   animation-name: brighten;
   filter: brightness(1);
-  transition: 3s;
 }
 
 @keyframes brighten {
@@ -348,11 +346,13 @@ img {
 
 @keyframes rise {
   from {
-    translate: -100px 170px;
+    top: 170px;
+    right: 275px;
   }
 
   to {
-    translate: 0 0;
+    top: 30px;
+    right: 200px;
   }
 }
 
@@ -366,7 +366,7 @@ img {
     opacity: 0;
   }
 
-  2% {
+  1% {
     opacity: 1;
   }
 
