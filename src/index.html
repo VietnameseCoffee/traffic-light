@@ -7,7 +7,7 @@
     <title>Traffic Light Simulator</title>
 </head>
 <body>
-    <div id="app">
+    <div id="app" style="visibility: hidden;">
         <div id="view" class="view">
             <div id="backdrop">
                 <div class="sky"></div>
@@ -32,7 +32,7 @@
                 </div>
                 </div>
             </div>
-            <div id="modal">
+            <div id="modal" class="modal">
                 <div class="border">
                     <div class="content">
                         <h1>Traffic Light Simulator</h1>
@@ -41,34 +41,31 @@
                                 Control a traffic light as cars zoom by during rush hour in New Townsville.
                             </p>
                             <p>
+                                <b>INSTRUCTIONS:</b> Buttons appear on the bottom row below.
+                            </p>
+                            <p>
+                                <b>LIGHT:</b> Start and Stop buttons to cycle on and off the traffic light.
+                            </p>
+                            <p>
+                                <b>LANES:</b> Signals which lane the manually generated cars come from. Can be seen with a red
+                                indicator at the right end of the street.
+                            <p>
+                            <p>
+                                <b>CARS:</b> Create on demand the three types of cars. Randomly generate cars
+                                by toggling the Auto button. Auto generate creates cars in any lane.
+                            </p>
                                 Some cars are faster than others like the sports car zooming by compared to the Bug,
-                                but it also depends on which browser you are using too!
+                                but it also depends on your browser too!
                             </p>
                             <p>
-                                Cars move using several types of JavaScript methods, specifically
-                                requestAnimationFrame, setTimeout, setInterval. This simulation showcases the
-                                different callback rates when they get called in the event loop,
-                                most notably between requestAnimationFrame and setTimeout/setInterval.
+                                Each car uses a different JavaScript mechanism to move, specifically requestAnimationFrame,
+                                setTimeout, setInterval (respective to the buttons). This simulation showcases their different callback rates in the
+                                event loop, and different browser mechanism. Try this simulator out on different browsers
+                                and see variations in performance and speed!
                             </p>
-                            <p>
-                                Ultimately car performance depends on the browser and how they implement the
-                                event loop under the hood. Try this simulator out on different browsers and see
-                                the difference in performance!
-                            </p>
-                            Resources:
-                            <div>
-                                <a href="https://developer.mozilla.org/en-US/docs/Web/API/setInterval">Mozilla Docs setInterval</a>
-                            </div>
-                            <div>
-                                <a href="https://developer.mozilla.org/en-US/docs/Web/API/setTimeout">Mozilla Docs setTimeout</a>
-                            </div>
-                            <div>
-                                <a href="https://www.macarthur.me/posts/navigating-the-event-loop">Event Loop</a>
-                            </div>
                             <div>
                                 SVGs and icons by W3, IconScout, OpenGameArt, and Shutterstock
                             </div>
-                            <button class="btn" id="init"init>START</button>
                         </div>
                     </div>
                 </div>
@@ -79,8 +76,10 @@
                     LIGHT
                     <button class="btn grn" id="light-start">Start</button>
                     <button class="btn red" id="light-stop">Stop</button>
+                    LANES
+                    <button class="btn" id="lane">Top</button>
                     CARS
-                    <button class="btn" id="auto" data-on="off">Auto Off</button>
+                    <button class="btn" id="auto" data-on="off">Auto OFF</button>
                     <button class="btn" id="add-slow">
                         <div class="btn-car slow"></div>
                     </button>
@@ -90,9 +89,9 @@
                     <button class="btn" id="add-fast">
                         <div class="btn-car fast"></div>
                     </button>
-                    LANES
-                    <button class="btn" id="lane">Top</button>
+                    <button class="btn btn-info" id="info">?</button>
                 </div>
+                <button class="btn" id="init"init>START</button>
             </div>
         </div>
     </div>
